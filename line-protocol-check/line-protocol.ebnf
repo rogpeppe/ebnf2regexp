@@ -7,7 +7,7 @@ nonprintable_char = "\u0000"…"\u001f" | "\u007f" .
 lines = line { newline_char line } .
 line = { whitespace_char } [ point | comment ] .
 point = measurement { "," tag } whitespace field { "," field } [ whitespace timestamp ] {whitespace_char} .
-comment = "#" { not(nonprintable_char) } .
+comment = "#" { not(nonprintable_char) | "\t" } .
 
 measurement = measurement_elem { measurement_elem } .
 measurement_elem = measurement_regular_char | measurement_escape_seq .
@@ -28,7 +28,7 @@ decimal_digits = decimal_digit { decimal_digit } .
 decimal_digit = "0" … "9" .
 
 boolfield = "t" | "T" | "true" | "True" | "TRUE" | "f" | "F" | "false" | "False" | "FALSE" .
-intfield = [ "-" ] decimal_digit { decimal_digit } "i" .
+intfield = [ "-" ] decimal_digits "i" .
 uintfield = decimal_digits "u" .
 
 floatfield = [ "-" ] non_negative_float .
