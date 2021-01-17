@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	qt "github.com/frankban/quicktest"
-	"github.com/rogpeppe/misc/ebnf2regexp/ebnf"
+	"github.com/rogpeppe/ebnf2regexp/ebnf"
 )
 
 var translateTests = []struct {

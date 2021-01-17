@@ -6,7 +6,7 @@ import (
 	"regexp/syntax"
 	"unicode"
 
-	"github.com/rogpeppe/misc/ebnf2regexp/ebnf"
+	"github.com/rogpeppe/ebnf2regexp/ebnf"
 )
 
 // Line-protocol syntax as a regular expression.

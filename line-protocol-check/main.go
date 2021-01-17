@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -12,11 +13,14 @@ import (
 
 	"github.com/influxdata/line-protocol-corpus/lpcorpus"
 	"github.com/influxdata/line-protocol/influxdata"
-	"github.com/rogpeppe/misc/ebnf2regexp"
-	"github.com/rogpeppe/misc/ebnf2regexp/ebnf"
+	"github.com/rogpeppe/ebnf2regexp"
+	"github.com/rogpeppe/ebnf2regexp/ebnf"
 )
 
+var verbose = flag.Bool("v", false, "verbose mode (print regexp)")
+
 func main() {
+	flag.Parse()
 	f, err := os.Open("line-protocol.ebnf")
 	if err != nil {
 		log.Fatal(err)
@@ -29,6 +33,9 @@ func main() {
 	reStr, err := ebnf2regexp.Translate(g, "lines")
 	if err != nil {
 		log.Fatal(err)
+	}
+	if *verbose {
+		fmt.Println(reStr)
 	}
 	re := regexp.MustCompile(reStr)
 	if err := runSanityChecks(re); err != nil {
