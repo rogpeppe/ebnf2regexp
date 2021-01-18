@@ -134,17 +134,6 @@ func ebnfExprs(g ebnf.Grammar, es []ebnf.Expression) []*syntax.Regexp {
 
 type expr = *syntax.Regexp
 
-func suffixOp(e expr, op syntax.Op) expr {
-	return &syntax.Regexp{
-		Op:  op,
-		Sub: []*syntax.Regexp{e},
-	}
-}
-
-func oneOrMore(e expr) expr {
-	return suffixOp(e, syntax.OpPlus)
-}
-
 func or(es []expr) expr {
 	// Assume until proved otherwise that the subexpressions are single characters,
 	// so the result is a single character, and build up the union inside rs.

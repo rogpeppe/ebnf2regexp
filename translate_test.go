@@ -65,6 +65,7 @@ func TestTranslate(t *testing.T) {
 			g, err := ebnf.Parse("test", strings.NewReader(test.ebnf))
 			c.Assert(err, qt.IsNil)
 			r, err := Translate(g, test.start)
+			c.Assert(err, qt.IsNil)
 			c.Assert(r, qt.Equals, test.expect)
 		})
 	}
